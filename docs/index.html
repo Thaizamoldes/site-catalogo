@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catálogo de Moldes</title>
+<meta name="description" content="Catálogo dos modelos disponíveis na assinatura de moldes.">
+<meta name="theme-color" content="#faf7f2">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%E2%9C%82%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="modelos.js" as="script">
+<style>
+:root{
+  --bg:#faf7f2;--card:#fff;--ink:#2b2420;--muted:#7a6e66;--line:#e9e1d6;
+  --accent:#9c6b4e;--accent-ink:#fff;--shadow:0 1px 3px rgba(60,40,20,.08);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{text-align:center;padding:36px 16px 20px}
+h1{font:600 clamp(28px,6vw,44px)/1.1 Georgia,"Times New Roman",serif;margin:0;letter-spacing:.01em}
+.sub{margin:8px 0 0;color:var(--muted)}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px}
+.bar-in{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.search{width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:999px;
+  background:var(--card);font:inherit;color:inherit;outline:none}
+.search:focus{border-color:var(--accent)}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);
+  padding:7px 14px;border-radius:999px;font:inherit;font-size:14px;cursor:pointer;white-space:nowrap}
+.chip span{color:var(--muted);margin-left:4px;font-size:12px}
+.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chip[aria-pressed=true] span{color:inherit;opacity:.8}
+main{max-width:1200px;margin:0 auto;padding:8px 16px 48px}
+section{margin-top:28px}
+h2{font:600 22px/1.2 Georgia,"Times New Roman",serif;margin:0 0 14px;display:flex;align-items:baseline;gap:8px}
+h2 small{font:13px system-ui,sans-serif;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+@media (max-width:420px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}}
+.card{margin:0;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);
+  cursor:zoom-in;border:0;padding:0;text-align:left;font:inherit;color:inherit;display:block;width:100%}
+.card img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;background:#f1ece5}
+.card b{display:block;font-weight:500;font-size:14px;line-height:1.3;padding:9px 10px 11px}
+.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.empty{text-align:center;color:var(--muted);padding:48px 0}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:0 16px 32px}
+dialog{border:0;padding:0;background:transparent;max-width:100vw;max-height:100vh;width:100%;height:100%}
+dialog::backdrop{background:rgba(20,14,10,.88)}
+.lb{position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px}
+.lb img{height:calc(100% - 56px);max-width:100%;width:auto;object-fit:contain;border-radius:8px;background:#fff}
+.lb p{color:#fff;margin:12px 0 0;text-align:center;font-size:16px}
+.lb p small{display:block;opacity:.7;font-size:13px}
+.lb button{position:absolute;background:rgba(255,255,255,.14);color:#fff;border:0;width:44px;height:44px;
+  border-radius:50%;font-size:24px;line-height:1;cursor:pointer}
+.lb .x{top:12px;right:12px}
+.lb .prev{left:12px;top:50%;transform:translateY(-50%)}
+.lb .next{right:12px;top:50%;transform:translateY(-50%)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Catálogo de Moldes</h1>
+  <p class="sub">Todos os modelos inclusos na assinatura</p>
+</header>
+
+<div class="bar"><div class="bar-in">
+  <input class="search" id="q" type="search" placeholder="Buscar modelo…" aria-label="Buscar modelo" autocomplete="off">
+  <nav class="chips" id="chips" aria-label="Categorias"></nav>
+</div></div>
+
+<main id="lista"></main>
+<footer id="total"></footer>
+
+<dialog id="dlg" aria-label="Foto ampliada">
+  <div class="lb">
+    <button class="x" id="fechar" aria-label="Fechar">&times;</button>
+    <button class="prev" id="ant" aria-label="Anterior">&#8249;</button>
+    <img id="foto" alt="">
+    <p id="legenda"></p>
+    <button class="next" id="prox" aria-label="Próximo">&#8250;</button>
+  </div>
+</dialog>
+
+<script src="modelos.js"></script>
+<script>
+(function () {
+  var M = window.MODELOS || [];
+  var $ = function (id) { return document.getElementById(id); };
+  var cats = [];
+  M.forEach(function (m) { if (cats.indexOf(m.c) < 0) cats.push(m.c); });
+  var atual = 'Todos', visiveis = [], idx = 0;
+
+  function norm(s) { return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+  function esc(s) { return s.replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function src(m, size) { return 'img/' + m.s + '-' + size + '.webp'; }
+
+  // Chips de categoria
+  var chips = [['Todos', M.length]].concat(cats.map(function (c) {
+    return [c, M.filter(function (m) { return m.c === c; }).length];
+  }));
+  $('chips').innerHTML = chips.map(function (c) {
+    return '<button class="chip" type="button" data-c="' + esc(c[0]) + '" aria-pressed="' + (c[0] === atual) + '">' +
+      esc(c[0]) + '<span>' + c[1] + '</span></button>';
+  }).join('');
+  $('chips').addEventListener('click', function (e) {
+    var b = e.target.closest('.chip'); if (!b) return;
+    atual = b.getAttribute('data-c');
+    [].forEach.call(this.children, function (x) { x.setAttribute('aria-pressed', x === b); });
+    render();
+    window.scrollTo({ top: $('lista').offsetTop - 120, behavior: 'smooth' });
+  });
+
+  var timer;
+  $('q').addEventListener('input', function () { clearTimeout(timer); timer = setTimeout(render, 120); });
+
+  function card(m, i, eager) {
+    var w1 = Math.min(400, m.w), w2 = Math.min(800, m.w);
+    var set = w2 > w1 ? ' srcset="' + src(m, 400) + ' ' + w1 + 'w, ' + src(m, 800) + ' ' + w2 + 'w"' +
+      ' sizes="(max-width:420px) 48vw, (max-width:1200px) 25vw, 220px"' : '';
+    return '<button class="card" type="button" data-i="' + i + '">' +
+      '<img src="' + src(m, 400) + '"' + set + ' width="300" height="400" alt="' + esc(m.n) + '" decoding="async"' +
+      (eager ? ' fetchpriority="high"' : ' loading="lazy"') + '>' +
+      '<b>' + esc(m.n) + '</b></button>';
+  }
+
+  function render() {
+    var q = norm($('q').value.trim());
+    visiveis = M.filter(function (m) {
+      return (atual === 'Todos' || m.c === atual) && (!q || norm(m.n + ' ' + m.c).indexOf(q) >= 0);
+    });
+    var html = '', n = 0;
+    cats.forEach(function (c) {
+      var itens = visiveis.filter(function (m) { return m.c === c; });
+      if (!itens.length) return;
+      html += '<section><h2>' + esc(c) + ' <small>' + itens.length + ' modelos</small></h2><div class="grid">' +
+        itens.map(function (m) { var i = visiveis.indexOf(m); return card(m, i, n++ < 6); }).join('') + '</div></section>';
+    });
+    $('lista').innerHTML = html || '<p class="empty">Nenhum modelo encontrado.</p>';
+    $('total').textContent = visiveis.length + ' de ' + M.length + ' modelos';
+  }
+
+  // Foto ampliada
+  var dlg = $('dlg');
+  function abrir(i) {
+    idx = (i + visiveis.length) % visiveis.length;
+    var m = visiveis[idx];
+    $('foto').src = src(m, 1200);
+    $('foto').alt = m.n;
+    $('legenda').innerHTML = esc(m.n) + '<small>' + esc(m.c) + '</small>';
+    if (!dlg.open) dlg.showModal();
+    // Pré-carrega a próxima foto para a navegação ficar instantânea.
+    var p = visiveis[(idx + 1) % visiveis.length]; if (p) new Image().src = src(p, 1200);
+  }
+  $('lista').addEventListener('click', function (e) {
+    var c = e.target.closest('.card'); if (c) abrir(+c.getAttribute('data-i'));
+  });
+  $('fechar').onclick = function () { dlg.close(); };
+  $('ant').onclick = function () { abrir(idx - 1); };
+  $('prox').onclick = function () { abrir(idx + 1); };
+  dlg.addEventListener('click', function (e) { if (e.target === dlg || e.target.classList.contains('lb')) dlg.close(); });
+  dlg.addEventListener('close', function () { $('foto').removeAttribute('src'); });
+  document.addEventListener('keydown', function (e) {
+    if (!dlg.open) return;
+    if (e.key === 'ArrowLeft') abrir(idx - 1);
+    if (e.key === 'ArrowRight') abrir(idx + 1);
+  });
+  var x0 = null;
+  dlg.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  dlg.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 50) abrir(idx + (dx < 0 ? 1 : -1));
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

@@ -41,11 +41,8 @@ RATIO = 4 / 3  # todas as fotos são exibidas em retrato 3:4
 ORDEM = [
     "Vestidos",
     "Saias",
-    "Calças",
-    "Shorts e Bermudas",
-    "Macacões",
-    "Blusas e Camisas",
-    "Coletes",
+    "Calças, Shorts e Macacões",
+    "Blusas, Camisas e Coletes",
     "Casacos e Jaquetas",
 ]
 

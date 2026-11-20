@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assinatura de Moldes — Black Friday</title>
+<meta name="description" content="Moldes testados, do PP ao GG, com ficha técnica e aula de costura em vídeo. Na Black Friday, o plano anual vem com o Curso de Moda Praia de brinde.">
+<meta property="og:title" content="Assinatura de Moldes — Black Friday">
+<meta property="og:description" content="Moldes testados do PP ao GG + aula de costura em vídeo. No plano anual, ganhe o Curso de Moda Praia de brinde.">
+<meta property="og:image" content="img/peca-pronta.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{--vinho:#7d2e46;--vinho-esc:#5a1f31;--creme:#faf6f0;--areia:#f1e7dc;--preto:#16110f;--texto:#2c1a22;--suave:#6e5560}
+  *{box-sizing:border-box;min-width:0}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--texto);font:17px/1.6 Inter,system-ui,sans-serif;overflow-x:clip}
+  img{display:block;max-width:100%}
+  h1,h2{font-family:"Cormorant Garamond",Georgia,serif;line-height:1.05;margin:0;text-wrap:balance}
+  .wrap{max-width:980px;margin:0 auto;padding:0 18px}
+  .faixa{background:var(--preto);color:#fff;text-align:center;font-size:15px;font-weight:600;padding:10px 14px}
+  .faixa b{color:#f3c1cf}
+
+  .hero{background:var(--vinho);color:#fff;padding:34px 0 40px}
+  .hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:30px;align-items:center}
+  .selo{display:inline-block;background:var(--preto);color:#fff;font-weight:800;font-size:14px;padding:6px 14px;border-radius:999px;margin-bottom:14px}
+  .hero h1{font-size:clamp(40px,7vw,58px)}
+  .hero .lead{font-size:19px;margin:12px 0 18px;opacity:.95}
+  .brinde{background:rgba(255,255,255,.12);border-radius:14px;padding:14px 16px;font-size:17px;margin-bottom:20px}
+  .brinde b{color:#f3c1cf}
+  .hero .foto img{border-radius:18px;width:100%;aspect-ratio:4/5;object-fit:cover}
+  .btn{display:block;text-align:center;text-decoration:none;font-weight:800;font-size:19px;padding:17px 18px;border-radius:12px;max-width:400px}
+  .btn-claro{background:#fff;color:var(--vinho)}
+  .btn-vinho{background:var(--vinho);color:#fff;margin:0 auto}
+  .btn-vinho:hover{background:var(--vinho-esc)}
+  .nota{font-size:14px;opacity:.85;margin-top:10px}
+
+  section{padding:44px 0}
+  h2{font-size:clamp(32px,5vw,42px);color:var(--vinho);margin-bottom:8px;text-align:center}
+  .sub{color:var(--suave);margin:0 auto 24px;text-align:center;max-width:36em}
+
+  .itens{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .item{background:#fff;border-radius:14px;padding:18px;box-shadow:0 3px 14px rgba(0,0,0,.05)}
+  .item b{display:block;color:var(--vinho);font-size:18px;margin-bottom:4px}
+
+  .passos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:p}
+  .passo{background:#fff;border-radius:14px;padding:18px 18px 18px 60px;position:relative;box-shadow:0 3px 14px rgba(0,0,0,.05)}
+  .passo::before{counter-increment:p;content:counter(p);position:absolute;left:16px;top:16px;width:32px;height:32px;border-radius:50%;background:var(--vinho);color:#fff;font-weight:800;display:grid;place-items:center}
+
+  .oferta{background:var(--areia)}
+  .card{background:#fff;border:3px solid var(--vinho);border-radius:18px;padding:24px 20px;max-width:560px;margin:0 auto;position:relative;box-shadow:0 6px 24px rgba(125,46,70,.12)}
+  .tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--preto);color:#fff;font-size:13px;font-weight:800;padding:5px 14px;border-radius:999px;white-space:nowrap}
+  .card h3{margin:6px 0 10px;font-size:21px;text-align:center}
+  .card ul{list-style:none;padding:0;margin:0 0 14px}
+  .card li{padding:7px 0 7px 28px;position:relative;border-bottom:1px solid var(--areia)}
+  .card li::before{content:"✓";position:absolute;left:2px;color:var(--vinho);font-weight:800}
+  .bonus{background:var(--creme);border-radius:12px;padding:14px;margin:6px 0 16px}
+  .bonus p{margin:0 0 10px;font-size:16px}
+  .bonus .mini{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+  .bonus .mini img{background:#fff;border-radius:8px;aspect-ratio:1/1;object-fit:contain;padding:3px}
+  .conta div{display:flex;justify-content:space-between;gap:10px;font-size:15px}
+  s{color:var(--suave)}
+  .preco{text-align:center;margin-top:12px}
+  .preco .v{font-size:40px;font-weight:800;color:var(--vinho);line-height:1.1;white-space:nowrap}
+  .preco .p{color:var(--suave);font-size:15px;margin:2px 0 16px}
+
+  .iza{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:26px;align-items:center}
+  .iza img{border-radius:16px;width:100%;aspect-ratio:4/5;object-fit:cover}
+  .iza h2{text-align:left}
+  .iza p{margin:10px 0 0}
+
+  .garantia{background:var(--vinho);color:#fff;text-align:center}
+  .garantia h2{color:#fff}
+  .garantia p{max-width:34em;margin:8px auto 0;opacity:.95}
+
+  details{background:#fff;border-radius:12px;margin-bottom:8px;padding:0 16px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+  summary{cursor:pointer;font-weight:700;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+  summary::after{content:"+";color:var(--vinho);font-size:22px;line-height:1}
+  details[open] summary::after{content:"–"}
+  details p{margin:0 0 14px;color:var(--suave)}
+  details img{border-radius:10px;margin:0 0 14px}
+  .final{text-align:center}
+  footer{text-align:center;font-size:13px;color:var(--suave);padding:8px 16px 28px}
+
+  @media(max-width:760px){
+    .hero .wrap,.iza{grid-template-columns:1fr}
+    .hero .foto{order:-1}
+    .hero .foto img{aspect-ratio:1/1}
+    .passos{grid-template-columns:1fr}.itens{grid-template-columns:1fr 1fr;gap:10px}.item{padding:14px;font-size:15px}.item b{font-size:16px}
+    .btn{max-width:none}
+    .iza h2{text-align:center}
+  }
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '246033433475773');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=246033433475773&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<div class="faixa">🖤 Black Friday: oferta válida até <b>segunda-feira, 30/11</b></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="selo">ASSINATURA DE MOLDES</span>
+      <h1>Moldes que dão certo, do PP ao GG</h1>
+      <p class="lead">Moldes testados e aprovados, com modelagem industrial, ficha técnica e aula de costura em vídeo. São 4 moldes novos todo mês.</p>
+      <div class="brinde">🖤 <b>Black Friday:</b> no plano anual você ganha de brinde o <b>Curso de Moda Praia</b>, com 10 moldes de maiô, biquíni e saída de praia.</div>
+      <a class="btn btn-claro" href="#oferta">Quero aproveitar a Black</a>
+      <p class="nota">Garantia de 7 dias · em até 12x no cartão</p>
+    </div>
+    <div class="foto"><img src="img/peca-pronta.jpg" alt="Vestido costurado com um molde da Assinatura de Moldes"></div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>O que você recebe na assinatura</h2>
+    <p class="sub">Tudo para cortar o tecido com segurança e costurar sem travar.</p>
+    <div class="itens">
+      <div class="item"><b>4 moldes novos por mês</b>Lançamentos toda semana.</div>
+      <div class="item"><b>Do PP ao GG</b>Cada tamanho em um arquivo.</div>
+      <div class="item"><b>Testados e aprovados</b>Costurados antes de publicar.</div>
+      <div class="item"><b>PDF e PLT</b>Imprima em casa ou no plotter.</div>
+      <div class="item"><b>Ficha técnica</b>Tecido, aviamentos e metragem.</div>
+      <div class="item"><b>Aula em vídeo</b>A costura passo a passo.</div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Como funciona</h2>
+    <p class="sub">Simples, do jeito que tem que ser.</p>
+    <div class="passos">
+      <div class="passo">Você entra no plano anual e recebe o acesso na hora.</div>
+      <div class="passo">Escolhe o molde, imprime e confere a ficha técnica.</div>
+      <div class="passo">Assiste à aula em vídeo e costura com segurança.</div>
+    </div>
+  </div>
+</section>
+
+<section class="oferta" id="oferta">
+  <div class="wrap">
+    <h2>A oferta da Black Friday</h2>
+    <p class="sub">Só até segunda-feira, 30/11.</p>
+    <div class="card">
+      <span class="tag">🖤 OFERTA BLACK FRIDAY</span>
+      <h3>Plano anual da Assinatura de Moldes</h3>
+      <ul>
+        <li>12 meses de assinatura</li>
+        <li>4 moldes novos por mês + acervo completo</li>
+        <li>Ficha técnica e aula de costura em vídeo</li>
+        <li>Grupo VIP e votação dos próximos modelos</li>
+      </ul>
+      <div class="bonus">
+        <p>🎁 <b>De brinde:</b> o <b>Curso de Moda Praia</b>, com 10 moldes de maiô, biquíni e saída de praia e tutoriais em vídeo.</p>
+        <div class="mini" id="mini"></div>
+      </div>
+      <div class="conta">
+        <div><span>Plano anual</span><span>R$ 289,90</span></div>
+        <div><span>Curso de Moda Praia</span><span>R$ 197,00</span></div>
+        <div><span>Total</span><s>R$ 486,90</s></div>
+      </div>
+      <div class="preco">
+        <div class="v">R$ 289,90</div>
+        <div class="p">em até 12x no cartão · até 30/11</div>
+        <a class="btn btn-vinho checkout" href="https://pay.hotmart.com/E79768335W?off=0nqlwxz8">Quero o plano anual + brinde</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap iza">
+    <img src="img/iza-modelagem.jpg" alt="Iza fazendo a modelagem de uma peça no manequim">
+    <div>
+      <h2>Quem faz os moldes</h2>
+      <p>Oi, eu sou a Iza. Sou modelista industrial e trago para cada molde da assinatura a mesma qualidade técnica da modelagem de fábrica.</p>
+      <p>Criei a Assinatura de Moldes porque via muita costureira perdendo tempo e tecido com moldes que não vestiam bem. Por isso, nenhum molde é publicado sem antes ser costurado e conferido.</p>
+    </div>
+  </div>
+</section>
+
+<section class="garantia">
+  <div class="wrap">
+    <h2>Garantia de 7 dias</h2>
+    <p>Entre, conheça os moldes e assista às aulas. Se em até 7 dias você sentir que não é para você, devolvemos o seu dinheiro.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="max-width:720px">
+    <h2>Dúvidas frequentes</h2>
+    <p class="sub"></p>
+    <details><summary>Preciso ter experiência em costura?</summary><p>Não. A assinatura é para costureiras de todos os níveis. Cada molde vem com aula em vídeo mostrando a montagem passo a passo.</p></details>
+    <details><summary>Quais tamanhos vêm nos moldes?</summary><p>Todos os moldes vêm do PP ao GG, cada tamanho em um arquivo separado. Veja a tabela de medidas:</p><img src="img/medidas.jpg" alt="Tabela de medidas do PP ao GG"></details>
+    <details><summary>Como recebo os moldes?</summary><p>Os moldes são digitais. Você acessa tudo pela área de alunas, imprime em casa em folhas A4 (PDF) ou usa o arquivo PLT no plotter.</p></details>
+    <details><summary>O que é o brinde da Black Friday?</summary><p>Quem entra no plano anual até 30/11 ganha o Curso de Moda Praia: 10 moldes de maiô, biquíni e saída de praia, do PP ao GG, com tutoriais de costura em vídeo.</p></details>
+    <details><summary>Dá para parcelar?</summary><p>Sim, em até 12x no cartão.</p></details>
+  </div>
+</section>
+
+<section class="final" style="padding-top:0">
+  <div class="wrap">
+    <h2>Entre na assinatura na Black</h2>
+    <p class="sub">Plano anual + Curso de Moda Praia de brinde, por R$ 289,90.</p>
+    <a class="btn btn-vinho checkout" href="https://pay.hotmart.com/E79768335W?off=0nqlwxz8">Quero o plano anual + brinde</a>
+  </div>
+</section>
+
+<footer>Thaíza Gonçalves · Modelista Industrial e Professora de Costura · @izagonn</footer>
+
+<script>
+{
+  const p = ["maio","top-laco","cortininha","hotpant","saida","short"];
+  document.getElementById("mini").innerHTML = p.map(f => `<img src="../moda-praia/img/${f}.jpg" alt="" loading="lazy">`).join("");
+  document.querySelectorAll(".checkout").forEach(a => a.addEventListener("click", () => {
+    if (window.fbq) fbq("track", "InitiateCheckout", { content_name: "Plano anual + Moda Praia (Black)" });
+  }));
+}
+</script>
+</body>
+</html>
